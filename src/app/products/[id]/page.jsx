@@ -4,8 +4,9 @@ import ProductDetailsWrapper from './ProductDetailsWrapper';
 import ProductCacheWrapper from './ProductCacheWrapper';
 
 export default async function ProductPage({ params }) {
-  // Ensure params is properly awaited
-  const id = params.id;
+
+  // We can destructure it directly
+  const { id } = params;
   const product = await fetchProductById(id);
 
   if (!product) {
