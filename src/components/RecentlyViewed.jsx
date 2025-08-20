@@ -1,6 +1,6 @@
 'use client';
 
-// components/RecentlyViewed.js
+            // components/RecentlyViewed.js
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
@@ -8,11 +8,11 @@ const RecentlyViewed = () => {
   const [recentlyViewedProducts, setRecentlyViewedProducts] = useState([]);
 
   useEffect(() => {
-    // TODO: Implement logic to load recently viewed products from localStorage or cookies.
-    // Ensure only the last 3 unique products are shown.
-    // This component is currently a placeholder.
-    const storedProducts = []; // Replace with actual logic to retrieve from storage
-    setRecentlyViewedProducts(storedProducts);
+                // Load recently viewed products from localStorage
+    const storedProducts = localStorage.getItem('recentlyViewedProducts');
+    if (storedProducts) {
+      setRecentlyViewedProducts(JSON.parse(storedProducts));
+    }
   }, []);
 
   if (recentlyViewedProducts.length === 0) {
