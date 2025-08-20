@@ -1,5 +1,6 @@
 // components/ProductDetails.js
 import React from 'react';
+import Image from 'next/image';
 
 const ProductDetails = ({
   product,
@@ -19,9 +20,16 @@ const ProductDetails = ({
   return (
     <div className="flex flex-col md:flex-row gap-8">
       {/* Product Image */}
-      <div className="md:w-1/2 flex justify-center items-center bg-gray-100 rounded-lg overflow-hidden shadow-md">
-        {/* BUG 4: Non-optimized image with missing alt text */}
-        <img src={product.imageUrl} alt="" className="w-full h-auto" />
+      <div className="md:w-1/2 flex justify-center items-center bg-gray-100 rounded-lg overflow-hidden shadow-md relative h-[400px]">
+        {/* Optimized image with Next.js Image component */}
+        <Image 
+          src={product.imageUrl} 
+          alt={`${product.name} in ${selectedColor || 'default'} color`} 
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          priority
+          className="object-contain"
+        />
       </div>
 
       {/* Product Info */}

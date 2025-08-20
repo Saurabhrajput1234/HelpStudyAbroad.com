@@ -1,9 +1,11 @@
 import { fetchProductById } from '@/data/products';
 import { notFound } from 'next/navigation';
 import ProductDetailsWrapper from './ProductDetailsWrapper';
+import ProductCacheWrapper from './ProductCacheWrapper';
 
 export default async function ProductPage({ params }) {
-  const { id } = params;
+  // Ensure params is properly awaited
+  const id = params.id;
   const product = await fetchProductById(id);
 
   if (!product) {
@@ -12,7 +14,7 @@ export default async function ProductPage({ params }) {
 
   return (
     <div className="p-8 bg-white rounded-lg shadow-xl">
-      <ProductDetailsWrapper product={product} />
+      <ProductCacheWrapper product={product} />
     </div>
   );
 }
