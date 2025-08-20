@@ -12,7 +12,7 @@ This is a **Next.js e-commerce product page** with cart, recently viewed product
 
 ---
 
-## 🔧 After (Fixes & Features)
+##  After (Fixes & Features)
 - Fixed SSR with correct data fetching.   
 - Synced color → size selections with defaults.   
 - Cart now validates color & size before adding.   
