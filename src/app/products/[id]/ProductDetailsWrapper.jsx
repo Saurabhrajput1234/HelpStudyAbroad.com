@@ -8,20 +8,24 @@ import { CartContext } from '@/context/CartContext';
 export default function ProductDetailsWrapper({ product }) {
   const { addToCart } = useContext(CartContext);
 
-  // BUG 1: No default color selected
-  const [selectedColor, setSelectedColor] = useState('');
+  // Set default color to the first variant's color
+  const [selectedColor, setSelectedColor] = useState(product.variants[0]?.color || '');
   const [selectedSize, setSelectedSize] = useState('');
 
-  // BUG 2: Always shows first variant's sizes regardless of selected color
-  const availableSizesForColor = product.variants[0]?.sizes || [];
+  // Get available sizes based on the selected color
+  const availableSizesForColor = product.variants.find(v => v.color === selectedColor)?.sizes || [];
 
-  // BUG 6: Empty dependency array - won't reset when color changes
+  // Reset selected size when color changes
   useEffect(() => {
     setSelectedSize('');
-  }, []);
+  }, [selectedColor]);
 
-  // BUG 5: Only checks size, not color
+  // Check both color and size before adding to cart
   const handleAddToCart = () => {
+    if (!selectedColor) {
+      alert('Please select a color.');
+      return;
+    }
     if (!selectedSize) {
       alert('Please select a size.');
       return;
